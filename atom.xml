@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-06T12:07:11.128Z</updated>
+  <updated>2020-06-12T19:28:20.753Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-322-零钱兑换</title>
+    <link href="http://yoursite.com/2020/06/13/leetcode-322-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/"/>
+    <id>http://yoursite.com/2020/06/13/leetcode-322-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</id>
+    <published>2020-06-12T18:52:22.000Z</published>
+    <updated>2020-06-12T19:28:20.753Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="初始思路"><a href="#初始思路" class="headerlink" title="初始思路"></a>初始思路</h3><ol><li>利用回溯法穷举所有情况，时间复杂度过高</li><li>递归，每次取一个使剩余总金额大于0的最大硬币，栈太深且复杂度高</li><li>贪心，每次取最大的硬币最多的个数，使剩余总金额大于0，但贪心不能完全解决问题，例如硬币为[1,7,10]，总金额为14，贪心的结果为5，最实际结果为2</li></ol><h3 id="最终方案"><a href="#最终方案" class="headerlink" title="最终方案"></a>最终方案</h3><p>贪心+深度优先搜索+剪枝</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">coinChange</span><span class="params">(<span class="keyword">int</span>[] coins, <span class="keyword">int</span> amount)</span> </span>&#123;</span><br><span class="line">        Arrays.sort(coins);</span><br><span class="line">        </span><br><span class="line">    <span class="comment">//利用数组保存最终的硬币个数</span></span><br><span class="line">        <span class="keyword">int</span>[] ret = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">1</span>];</span><br><span class="line">        ret[<span class="number">0</span>] = Integer.MAX_VALUE;</span><br><span class="line">        dfsBackTracing(coins, amount, coins.length - <span class="number">1</span>, <span class="number">0</span>, ret);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ret[<span class="number">0</span>] == Integer.MAX_VALUE ? -<span class="number">1</span> : ret[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dfsBackTracing</span><span class="params">(<span class="keyword">int</span>[] coins, <span class="keyword">int</span> amount, <span class="keyword">int</span> index, <span class="keyword">int</span> count, <span class="keyword">int</span>[] ret)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(amount == <span class="number">0</span>) &#123;</span><br><span class="line">            ret[<span class="number">0</span>] = Math.min(count, ret[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(index &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">//当前硬币的最多个数</span></span><br><span class="line">        <span class="keyword">int</span> k = amount/coins[index];</span><br><span class="line">    <span class="comment">//做剪枝处理</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = k; i &gt;= <span class="number">0</span> &amp;&amp; k+count &lt; ret[<span class="number">0</span>]; i--) &#123;</span><br><span class="line">            dfsBackTracing(coins, amount-i*coins[index], index-<span class="number">1</span>, count+i, ret);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任
+      
+    
+    </summary>
+    
+    
+      <category term="leetcode" scheme="http://yoursite.com/categories/leetcode/"/>
+    
+    
+      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
+    
+      <category term="动态规划" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
   
   <entry>
     <title>计算机网络大总结</title>

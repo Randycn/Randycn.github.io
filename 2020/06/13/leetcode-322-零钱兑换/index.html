@@ -20,20 +20,21 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="技术人生">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zzz&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2020/05/index.html">
+  <meta name="description" content="题目描述给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。 思路初始思路 利用回溯法穷举所有情况，时间复杂度过高 递归，每次取一个使剩余总金额大于0的最大硬币，栈太深且复杂度高 贪心，每次取最大的硬币最多的个数，使剩余总金额大于0，但贪心不能完全解决问题，例如硬币为[1,7,10]，总">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode-322-零钱兑换">
+<meta property="og:url" content="http://yoursite.com/2020/06/13/leetcode-322-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/index.html">
 <meta property="og:site_name" content="Zzz&#39;s Blog">
-<meta property="og:description" content="技术人生">
+<meta property="og:description" content="题目描述给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。 思路初始思路 利用回溯法穷举所有情况，时间复杂度过高 递归，每次取一个使剩余总金额大于0的最大硬币，栈太深且复杂度高 贪心，每次取最大的硬币最多的个数，使剩余总金额大于0，但贪心不能完全解决问题，例如硬币为[1,7,10]，总">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-12T18:52:22.000Z">
+<meta property="article:modified_time" content="2020-06-12T19:28:20.753Z">
 <meta property="article:author" content="zhouzz">
-<meta property="article:tag" content="Java">
-<meta property="article:tag" content=" C#">
-<meta property="article:tag" content=" 后端">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/archives/2020/05/">
+<link rel="canonical" href="http://yoursite.com/2020/06/13/leetcode-322-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/">
 
 
 <script id="page-configurations">
@@ -41,12 +42,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | Zzz's Blog</title>
+  <title>leetcode-322-零钱兑换 | Zzz's Blog</title>
   
 
 
@@ -148,50 +149,97 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 3 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/13/leetcode-322-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="zhouzz">
+      <meta itemprop="description" content="技术人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zzz's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          leetcode-322-零钱兑换
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-13 02:52:22 / 修改时间：03:28:20" itemprop="dateCreated datePublished" datetime="2020-06-13T02:52:22+08:00">2020-06-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="初始思路"><a href="#初始思路" class="headerlink" title="初始思路"></a>初始思路</h3><ol>
+<li>利用回溯法穷举所有情况，时间复杂度过高</li>
+<li>递归，每次取一个使剩余总金额大于0的最大硬币，栈太深且复杂度高</li>
+<li>贪心，每次取最大的硬币最多的个数，使剩余总金额大于0，但贪心不能完全解决问题，例如硬币为[1,7,10]，总金额为14，贪心的结果为5，最实际结果为2</li>
+</ol>
+<h3 id="最终方案"><a href="#最终方案" class="headerlink" title="最终方案"></a>最终方案</h3><p>贪心+深度优先搜索+剪枝</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">coinChange</span><span class="params">(<span class="keyword">int</span>[] coins, <span class="keyword">int</span> amount)</span> </span>&#123;</span><br><span class="line">        Arrays.sort(coins);</span><br><span class="line">        </span><br><span class="line">    	<span class="comment">//利用数组保存最终的硬币个数</span></span><br><span class="line">        <span class="keyword">int</span>[] ret = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">1</span>];</span><br><span class="line">        ret[<span class="number">0</span>] = Integer.MAX_VALUE;</span><br><span class="line">        dfsBackTracing(coins, amount, coins.length - <span class="number">1</span>, <span class="number">0</span>, ret);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ret[<span class="number">0</span>] == Integer.MAX_VALUE ? -<span class="number">1</span> : ret[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dfsBackTracing</span><span class="params">(<span class="keyword">int</span>[] coins, <span class="keyword">int</span> amount, <span class="keyword">int</span> index, <span class="keyword">int</span> count, <span class="keyword">int</span>[] ret)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(amount == <span class="number">0</span>) &#123;</span><br><span class="line">            ret[<span class="number">0</span>] = Math.min(count, ret[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(index &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    	<span class="comment">//当前硬币的最多个数</span></span><br><span class="line">        <span class="keyword">int</span> k = amount/coins[index];</span><br><span class="line">    	<span class="comment">//做剪枝处理</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = k; i &gt;= <span class="number">0</span> &amp;&amp; k+count &lt; ret[<span class="number">0</span>]; i--) &#123;</span><br><span class="line">            dfsBackTracing(coins, amount-i*coins[index], index-<span class="number">1</span>, count+i, ret);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-05-06T20:07:11+08:00"
-              content="2020-05-06">
-          05-06
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"># 动态规划</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/05/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%A4%A7%E6%80%BB%E7%BB%93/" itemprop="url">
-            <span itemprop="name">计算机网络大总结</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%A4%A7%E6%80%BB%E7%BB%93/" rel="prev" title="计算机网络大总结">
+      <i class="fa fa-chevron-left"></i> 计算机网络大总结
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -244,6 +292,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始思路"><span class="nav-number">2.1.</span> <span class="nav-text">初始思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最终方案"><span class="nav-number">2.2.</span> <span class="nav-text">最终方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
